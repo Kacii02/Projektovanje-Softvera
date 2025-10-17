@@ -22,25 +22,25 @@ public class Server extends Thread{
         try {
             serverSocket = new ServerSocket(port);
             pokrenut = true;
-            System.out.println("Server je pokrenut na portu " + port);
+            System.out.println("S: Server je pokrenut na portu " + port);
 
             while (pokrenut) {
                 try {
                     Socket clientSocket = serverSocket.accept();
-                    System.out.println("Klijent je povezan");
+                    System.out.println("S: Klijent je povezan");
                     ClientThread clientThread = new ClientThread(clientSocket);
                     clientThread.start();
                 } catch (IOException e) {
                     if (pokrenut) {
-                        System.out.println("Greska prilikom prihvatanja klijenta: " + e.getMessage());
+                        System.out.println("S: Greska prilikom prihvatanja klijenta: " + e.getMessage());
                     } else {
-                        System.out.println("Server je zaustavljen.");
+                        System.out.println("S: Server je zaustavljen.");
                     }
                 }
             }
 
         } catch (IOException ex) {
-            System.out.println("Greska prilikom pokretanja servera: " + ex.getMessage());
+            System.out.println("S: Greska prilikom pokretanja servera: " + ex.getMessage());
         }
     }
 
@@ -50,9 +50,9 @@ public class Server extends Thread{
             if (serverSocket != null && !serverSocket.isClosed()) {
                 serverSocket.close();
             }
-            System.out.println("Server je uspesno zaustavljen.");
+            System.out.println("S: Server je uspesno zaustavljen.");
         } catch (IOException e) {
-            System.out.println("Greska prilikom zaustavljanja servera: " + e.getMessage());
+            System.out.println("S: Greska prilikom zaustavljanja servera: " + e.getMessage());
         }
     }
     

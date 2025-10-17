@@ -4,7 +4,9 @@
  */
 package server;
 
+import controller.Controller;
 import java.net.Socket;
+import model.Bibliotekar;
 import transfer.ClientRequest;
 import transfer.Receiver;
 import transfer.Sender;
@@ -19,6 +21,7 @@ public class ClientThread extends Thread {
     private final Socket socket;
     private final Sender sender;
     private final Receiver receiver;
+    private Controller controller = Controller.getInstance();
 
     public ClientThread(Socket socket) {
         this.socket = socket;
@@ -34,13 +37,15 @@ public class ClientThread extends Thread {
             if (request == null) {
                 break;
             }
-            
+
             switch (request.getOperacija()) {
-//                case:
+                case LOGIN_BIBLIOTEKAR:
+                    response.setParams(controller.vrati((Bibliotekar) request.getParams()));
+                    break;
                 default:
                     throw new AssertionError();
             }
-            // sender.send(response);
+            sender.send(response);
         }
     }
 
