@@ -11,5 +11,9 @@ package operacije;
 public enum Operacija {
     LOGIN_BIBLIOTEKAR,
     LOGOUT_BIBLIOTEKAR,
+    VRATI_SVE_KNJIGE,
+    DODAJ_KNJIGU,
+    IZMENI_KNJIGU,
+    OBRISI_KNJIGU,
     
 }

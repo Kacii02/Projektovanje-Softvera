@@ -35,6 +35,13 @@ public class Knjiga implements Serializable, DomainObject<Knjiga> {
         this.autor = autor;
         this.izdavac = izdavac;
     }
+    
+    public Knjiga(String naslov, String isbn, String autor, String izdavac) {
+        this.naslov = naslov;
+        this.isbn = isbn;
+        this.autor = autor;
+        this.izdavac = izdavac;
+    }
 
     public int getIdKnjiga() {
         return idKnjiga;

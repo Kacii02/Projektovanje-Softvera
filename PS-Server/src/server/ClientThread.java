@@ -7,6 +7,7 @@ package server;
 import controller.Controller;
 import java.net.Socket;
 import model.Bibliotekar;
+import model.Knjiga;
 import transfer.ClientRequest;
 import transfer.Receiver;
 import transfer.Sender;
@@ -41,6 +42,18 @@ public class ClientThread extends Thread {
             switch (request.getOperacija()) {
                 case LOGIN_BIBLIOTEKAR:
                     response.setParams(controller.vrati((Bibliotekar) request.getParams()));
+                    break;
+                case VRATI_SVE_KNJIGE:
+                    response.setParams(controller.vratiSve(new Knjiga()));
+                    break;
+                case DODAJ_KNJIGU:
+                    response.setParams(controller.dodaj((Knjiga) request.getParams()));
+                    break;
+                case IZMENI_KNJIGU:
+                    response.setParams(controller.izmeni((Knjiga) request.getParams()));
+                    break;
+                case OBRISI_KNJIGU:
+                    response.setParams(controller.obrisi((Knjiga) request.getParams()));
                     break;
                 default:
                     throw new AssertionError();

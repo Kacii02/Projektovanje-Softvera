@@ -6,7 +6,9 @@ package communication;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.List;
 import model.Bibliotekar;
+import model.Knjiga;
 import operacije.Operacija;
 import transfer.ClientRequest;
 import transfer.Receiver;
@@ -40,7 +42,7 @@ public class Communication {
         }
         return instance;
     }
-    
+
     //Bibliotekar
     //Login
     public Bibliotekar login(Bibliotekar bibliotekar) {
@@ -48,6 +50,34 @@ public class Communication {
         sender.send(request);
         ServerResponse response = (ServerResponse) receiver.receive();
         return (Bibliotekar) response.getParams();
+    }
+
+    public List<Knjiga> vratiSveKnjige() {
+        ClientRequest request = new ClientRequest(null, Operacija.VRATI_SVE_KNJIGE);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (List<Knjiga>) response.getParams();
+    }
+
+    public int dodajKnjigu(Knjiga novaKnjiga) {
+        ClientRequest request = new ClientRequest(novaKnjiga, Operacija.DODAJ_KNJIGU);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (int) response.getParams();
+    }
+
+    public int izmeniKnjigu(Knjiga izmenjenaKnjiga) {
+        ClientRequest request = new ClientRequest(izmenjenaKnjiga, Operacija.IZMENI_KNJIGU);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (int) response.getParams();
+    }
+
+    public int obrisiKnjigu(Knjiga zaBrisanje) {
+        ClientRequest request = new ClientRequest(zaBrisanje, Operacija.OBRISI_KNJIGU);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (int) response.getParams();
     }
 
 }

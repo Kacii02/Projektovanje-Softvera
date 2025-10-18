@@ -119,6 +119,9 @@ public class FrmLogin extends javax.swing.JFrame {
 
         if (ulogovani != null) {
             JOptionPane.showMessageDialog(this, "Uspesno logovanje");
+            FrmBibliotekarGlavna frm = new FrmBibliotekarGlavna(ulogovani);
+            frm.setVisible(true);
+            frm.setLocationRelativeTo(null);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Pokusajte ponovni unos kredencijala za prijavu", "Pogresni kredencijali", JOptionPane.ERROR_MESSAGE);
