@@ -8,7 +8,9 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
 import model.Bibliotekar;
+import model.Clan;
 import model.Knjiga;
+import model.TipClanstva;
 import operacije.Operacija;
 import transfer.ClientRequest;
 import transfer.Receiver;
@@ -43,8 +45,7 @@ public class Communication {
         return instance;
     }
 
-    //Bibliotekar
-    //Login
+    //BIBLIOTEKAR
     public Bibliotekar login(Bibliotekar bibliotekar) {
         ClientRequest request = new ClientRequest(bibliotekar, Operacija.LOGIN_BIBLIOTEKAR);
         sender.send(request);
@@ -52,6 +53,7 @@ public class Communication {
         return (Bibliotekar) response.getParams();
     }
 
+    //KNJIGA
     public List<Knjiga> vratiSveKnjige() {
         ClientRequest request = new ClientRequest(null, Operacija.VRATI_SVE_KNJIGE);
         sender.send(request);
@@ -78,6 +80,43 @@ public class Communication {
         sender.send(request);
         ServerResponse response = (ServerResponse) receiver.receive();
         return (int) response.getParams();
+    }
+
+    //CLAN
+    public List<Clan> vratiSveClanove() {
+        ClientRequest request = new ClientRequest(null, Operacija.VRATI_SVE_CLANOVE);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (List<Clan>) response.getParams();
+    }
+
+    public int dodajClana(Clan noviClan) {
+        ClientRequest request = new ClientRequest(noviClan, Operacija.DODAJ_CLANA);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (int) response.getParams();
+    }
+
+    public int izmeniClana(Clan izabraniClan) {
+        ClientRequest request = new ClientRequest(izabraniClan, Operacija.IZMENI_CLANA);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (int) response.getParams();
+    }
+
+    public int obrisiClana(Clan clanZaBrisanje) {
+        ClientRequest request = new ClientRequest(clanZaBrisanje, Operacija.OBRISI_CLANA);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (int) response.getParams();
+    }
+
+    //TIP CLANSTVA
+    public List<TipClanstva> vratiSveTipoveClanstva() {
+        ClientRequest request = new ClientRequest(null, Operacija.VRATI_SVE_TIPOVE_CLANSTVA);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (List<TipClanstva>) response.getParams();
     }
 
 }

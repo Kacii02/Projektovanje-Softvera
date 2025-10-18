@@ -7,7 +7,9 @@ package server;
 import controller.Controller;
 import java.net.Socket;
 import model.Bibliotekar;
+import model.Clan;
 import model.Knjiga;
+import model.TipClanstva;
 import transfer.ClientRequest;
 import transfer.Receiver;
 import transfer.Sender;
@@ -40,9 +42,11 @@ public class ClientThread extends Thread {
             }
 
             switch (request.getOperacija()) {
+                //BIBLIOTEKAR
                 case LOGIN_BIBLIOTEKAR:
                     response.setParams(controller.vrati((Bibliotekar) request.getParams()));
                     break;
+                //KNJIGA
                 case VRATI_SVE_KNJIGE:
                     response.setParams(controller.vratiSve(new Knjiga()));
                     break;
@@ -54,6 +58,23 @@ public class ClientThread extends Thread {
                     break;
                 case OBRISI_KNJIGU:
                     response.setParams(controller.obrisi((Knjiga) request.getParams()));
+                    break;
+                //CLAN
+                case VRATI_SVE_CLANOVE:
+                    response.setParams(controller.vratiSve(new Clan()));
+                    break;
+                case DODAJ_CLANA:
+                    response.setParams(controller.dodaj((Clan) request.getParams()));
+                    break;
+                case IZMENI_CLANA:
+                    response.setParams(controller.izmeni((Clan) request.getParams()));
+                    break;
+                case OBRISI_CLANA:
+                    response.setParams(controller.obrisi((Clan) request.getParams()));
+                    break;
+                //TIP CLANSTVA
+                case VRATI_SVE_TIPOVE_CLANSTVA:
+                    response.setParams(controller.vratiSve(new TipClanstva()));
                     break;
                 default:
                     throw new AssertionError();

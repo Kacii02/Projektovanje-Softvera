@@ -201,6 +201,11 @@ public class FrmKnjige extends javax.swing.JFrame {
 
     private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
         int izbor = tblKnjige.getSelectedRow();
+        if(izbor==-1){
+            JOptionPane.showMessageDialog(this, "Morate izabrati knjigu za izmenu");
+            return;
+        }
+        
         TableModelKnjiga model = (TableModelKnjiga) tblKnjige.getModel();
         Knjiga izabrana = model.getKnjiga(izbor);
 

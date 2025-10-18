@@ -4,6 +4,7 @@
  */
 package forme;
 
+import forme.clan.FrmClan;
 import forme.knjiga.FrmKnjige;
 import model.Bibliotekar;
 
@@ -42,6 +43,7 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
         btnRadSaKnjigama = new javax.swing.JButton();
         lblSmena = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
+        btnRadSaClanovima = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,6 +69,13 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
             }
         });
 
+        btnRadSaClanovima.setText("Rad sa clanovima");
+        btnRadSaClanovima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRadSaClanovimaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,18 +84,19 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblSmena)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(btnRadSaKnjigama, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblBibliotekar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
-                        .addComponent(btnLogout)))
+                        .addComponent(btnLogout))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblSmena)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnRadSaClanovima, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -105,7 +115,9 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRadSaKnjigama)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRadSaClanovima)
+                .addContainerGap(169, Short.MAX_VALUE))
         );
 
         pack();
@@ -121,9 +133,16 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
         frmKnjige.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnRadSaKnjigamaActionPerformed
 
+    private void btnRadSaClanovimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRadSaClanovimaActionPerformed
+        FrmClan frmClan = new FrmClan();
+        frmClan.setVisible(true);
+        frmClan.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnRadSaClanovimaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnRadSaClanovima;
     private javax.swing.JButton btnRadSaKnjigama;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
