@@ -5,6 +5,7 @@
 package forme;
 
 import forme.clan.FrmClan;
+import forme.iznajmljivanje.FrmIznajmljivanje;
 import forme.knjiga.FrmKnjige;
 import model.Bibliotekar;
 
@@ -13,6 +14,7 @@ import model.Bibliotekar;
  * @author kacan
  */
 public class FrmBibliotekarGlavna extends javax.swing.JFrame {
+
     Bibliotekar ulogovani;
 
     /**
@@ -44,6 +46,7 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
         lblSmena = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         btnRadSaClanovima = new javax.swing.JButton();
+        btnIznajmljivanje = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,6 +79,13 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
             }
         });
 
+        btnIznajmljivanje.setText("Iznajmljivanje");
+        btnIznajmljivanje.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIznajmljivanjeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,12 +101,13 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
                         .addComponent(lblBibliotekar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
                         .addComponent(btnLogout))
+                    .addComponent(btnRadSaClanovima, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblSmena)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnRadSaClanovima, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnIznajmljivanje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -117,14 +128,16 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
                 .addComponent(btnRadSaKnjigama)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRadSaClanovima)
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnIznajmljivanje, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnRadSaKnjigamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRadSaKnjigamaActionPerformed
@@ -139,8 +152,15 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
         frmClan.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnRadSaClanovimaActionPerformed
 
+    private void btnIznajmljivanjeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIznajmljivanjeActionPerformed
+        FrmIznajmljivanje frmIznajmljivanje = new FrmIznajmljivanje(ulogovani);
+        frmIznajmljivanje.setVisible(true);
+        frmIznajmljivanje.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnIznajmljivanjeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIznajmljivanje;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnRadSaClanovima;
     private javax.swing.JButton btnRadSaKnjigama;

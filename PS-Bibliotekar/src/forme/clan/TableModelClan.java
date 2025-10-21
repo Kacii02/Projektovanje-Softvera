@@ -4,7 +4,6 @@
  */
 package forme.clan;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
@@ -19,7 +18,7 @@ public class TableModelClan extends AbstractTableModel {
     private String[] columns = {"Ime", "Prezime", "Email", "Datum uclanjenja", "Datum isteka clanarine", "Trajanje clanarine", "Broj pozajmljenih knjiga", "Tip clanstva"};
     private List<Clan> clanovi;
 
-    TableModelClan(List<Clan> clanovi) {
+    public TableModelClan(List<Clan> clanovi) {
         this.clanovi = clanovi;
     }
 

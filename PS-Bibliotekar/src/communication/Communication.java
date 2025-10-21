@@ -9,8 +9,11 @@ import java.net.Socket;
 import java.util.List;
 import model.Bibliotekar;
 import model.Clan;
+import model.Iznajmljivanje;
 import model.Knjiga;
+import model.StavkaIznajmljivanja;
 import model.TipClanstva;
+import model.pomocni.IznajmljivanjeSaStavkama;
 import operacije.Operacija;
 import transfer.ClientRequest;
 import transfer.Receiver;
@@ -117,6 +120,34 @@ public class Communication {
         sender.send(request);
         ServerResponse response = (ServerResponse) receiver.receive();
         return (List<TipClanstva>) response.getParams();
+    }
+
+    public List<Iznajmljivanje> vratiSvaIznajmljivanja() {
+        ClientRequest request = new ClientRequest(null, Operacija.VRATI_SVA_IZNAJMLJIVANJA);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (List<Iznajmljivanje>) response.getParams();
+    }
+
+    public int dodajIznajmljivanjeSaStavkama(IznajmljivanjeSaStavkama zaUnos) {
+        ClientRequest request = new ClientRequest(zaUnos, Operacija.DODAJ_IZNAJMLJIVANJE_SA_STAVKAMA);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (int) response.getParams();
+    }
+
+    public List<StavkaIznajmljivanja> vratiSveStavkeIznajmljivanja(StavkaIznajmljivanja stavkaZaPretragu) {
+        ClientRequest request = new ClientRequest(stavkaZaPretragu, Operacija.VRATI_SVE_STAVKE_IZNAJMLJIVANJA);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (List<StavkaIznajmljivanja>) response.getParams();
+    }
+
+    public int izmeniIznajmljivanjeSaStavkama(IznajmljivanjeSaStavkama zaUnos) {
+        ClientRequest request = new ClientRequest(zaUnos, Operacija.IZMENI_IZNAJMLJIVANJE);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (int) response.getParams();
     }
 
 }

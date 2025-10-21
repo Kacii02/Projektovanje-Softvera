@@ -34,6 +34,12 @@ public class StavkaIznajmljivanja implements Serializable, DomainObject<StavkaIz
         this.napomena = napomena;
     }
 
+    public StavkaIznajmljivanja(Iznajmljivanje iznajmljivanje, Knjiga knjiga, String napomena) {
+        this.iznajmljivanje = iznajmljivanje;
+        this.knjiga = knjiga;
+        this.napomena = napomena;
+    }
+
     public Iznajmljivanje getIznajmljivanje() {
         return iznajmljivanje;
     }
@@ -73,7 +79,7 @@ public class StavkaIznajmljivanja implements Serializable, DomainObject<StavkaIz
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
         return hash;
     }
 
@@ -89,10 +95,7 @@ public class StavkaIznajmljivanja implements Serializable, DomainObject<StavkaIz
             return false;
         }
         final StavkaIznajmljivanja other = (StavkaIznajmljivanja) obj;
-        if (this.rb != other.rb) {
-            return false;
-        }
-        return Objects.equals(this.iznajmljivanje, other.iznajmljivanje);
+        return Objects.equals(this.knjiga, other.knjiga);
     }
 
     @Override
@@ -176,17 +179,29 @@ public class StavkaIznajmljivanja implements Serializable, DomainObject<StavkaIz
 
     @Override
     public String getSelectAllQuery() {
-        return """
+        if (iznajmljivanje == null) {
+            return """
            SELECT si.iznajmljivanje, si.rb, si.napomena,
                   k.idKnjiga, k.naslov, k.isbn, k.autor, k.izdavac
            FROM stavka_iznajmljivanja si
            JOIN knjiga k ON si.knjiga = k.idKnjiga
            """;
+        } else {
+            return """
+            SELECT si.iznajmljivanje, si.rb, si.napomena,
+                  k.idKnjiga, k.naslov, k.isbn, k.autor, k.izdavac
+            FROM stavka_iznajmljivanja si
+            JOIN knjiga k ON si.knjiga = k.idKnjiga
+            WHERE si.iznajmljivanje = ?
+            """;
+        }
     }
 
     @Override
     public void fillSelectAllStatement(PreparedStatement ps) throws SQLException {
-        //Za ovu operaciju ne postoje parametri
+        if(iznajmljivanje!=null){
+             ps.setLong(1, iznajmljivanje.getIdIznajmljivanje());
+        }
     }
 
     @Override

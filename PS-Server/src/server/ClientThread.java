@@ -8,8 +8,11 @@ import controller.Controller;
 import java.net.Socket;
 import model.Bibliotekar;
 import model.Clan;
+import model.Iznajmljivanje;
 import model.Knjiga;
+import model.StavkaIznajmljivanja;
 import model.TipClanstva;
+import model.pomocni.IznajmljivanjeSaStavkama;
 import transfer.ClientRequest;
 import transfer.Receiver;
 import transfer.Sender;
@@ -76,6 +79,21 @@ public class ClientThread extends Thread {
                 case VRATI_SVE_TIPOVE_CLANSTVA:
                     response.setParams(controller.vratiSve(new TipClanstva()));
                     break;
+                //IZNAJMLJIVANJE
+                case VRATI_SVA_IZNAJMLJIVANJA:
+                    response.setParams(controller.vratiSve(new Iznajmljivanje()));
+                    break;
+                case DODAJ_IZNAJMLJIVANJE_SA_STAVKAMA:
+                    IznajmljivanjeSaStavkama zaDodavanje = (IznajmljivanjeSaStavkama) request.getParams();
+                    response.setParams(controller.kreirajIznajmljivanje(zaDodavanje.getIznajmljivanje(), zaDodavanje.getStavke()));
+                   break;
+                case VRATI_SVE_STAVKE_IZNAJMLJIVANJA:
+                    response.setParams(controller.vratiSve((StavkaIznajmljivanja) request.getParams()));
+                    break;
+                case IZMENI_IZNAJMLJIVANJE:
+                    IznajmljivanjeSaStavkama zaIzmenu = (IznajmljivanjeSaStavkama) request.getParams();
+                    response.setParams(controller.izmeniIznajmljivanje(zaIzmenu.getIznajmljivanje(), zaIzmenu.getStavke()));
+                   break;
                 default:
                     throw new AssertionError();
             }

@@ -130,7 +130,7 @@ public class Clan implements Serializable, DomainObject<Clan> {
 
     @Override
     public String toString() {
-        return ime + " " + prezime + ", email: " + email + ", tipClanstva: " + tipClanstva;
+        return ime + " " + prezime + " | " + email + " | " + tipClanstva;
     }
 
     @Override

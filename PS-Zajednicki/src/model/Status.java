@@ -4,11 +4,13 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author kacan
  */
-public enum Status {
+public enum Status implements Serializable{
     AKTIVNO, VRACENO
     
 }

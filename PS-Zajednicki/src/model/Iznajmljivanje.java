@@ -41,6 +41,16 @@ public class Iznajmljivanje implements Serializable, DomainObject<Iznajmljivanje
         this.status = status;
     }
 
+    public Iznajmljivanje(Bibliotekar bibliotekar, Clan clan, LocalDate datumIznajmljivanja, LocalDate rokVracanja, int brojStavkiIznajmljivanja, Status status) {
+
+        this.bibliotekar = bibliotekar;
+        this.clan = clan;
+        this.datumIznajmljivanja = datumIznajmljivanja;
+        this.rokVracanja = rokVracanja;
+        this.brojStavkiIznajmljivanja = brojStavkiIznajmljivanja;
+        this.status = status;
+    }
+
     public int getIdIznajmljivanje() {
         return idIznajmljivanje;
     }

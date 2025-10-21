@@ -16,7 +16,7 @@ public class TableModelKnjiga extends AbstractTableModel{
     private String [] columns = {"Naslov","ISBN","Autor","Izdavac"};
     private List<Knjiga> knjige;
     
-    TableModelKnjiga(List<Knjiga> knjige){
+    public TableModelKnjiga(List<Knjiga> knjige){
         this.knjige = knjige;
     }
  
@@ -49,7 +49,7 @@ public class TableModelKnjiga extends AbstractTableModel{
         return columns[column];
     }
 
-    Knjiga getKnjiga(int izbor) {
+    public Knjiga getKnjiga(int izbor) {
         return knjige.get(izbor);
     }
     

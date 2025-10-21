@@ -7,7 +7,11 @@ package controller;
 import baza.DbBroker;
 import domain.DomainObject;
 import java.util.List;
+import model.Iznajmljivanje;
+import model.StavkaIznajmljivanja;
+import operacije.IzmeniIznajmljivanjeSO;
 import operacije.IzmeniSO;
+import operacije.KreirajIznajmljivanjeSO;
 import operacije.KreirajSO;
 import operacije.ObrisiSO;
 import operacije.VratiSO;
@@ -74,6 +78,24 @@ public class Controller {
             return (int) new ObrisiSO<T>().execute(object);
         } catch (Exception ex) {
             System.out.println("C: Greska prilikom izvrsavanja obrisiSO: " + ex.getMessage());
+        }
+        return 0;
+    }
+    
+    public int kreirajIznajmljivanje(Iznajmljivanje i, List<StavkaIznajmljivanja> listaStavki) {
+        try {
+            return (int) new KreirajIznajmljivanjeSO(listaStavki).execute(i);
+        } catch (Exception ex) {
+            System.out.println("Greska prilikom izvrsavanja KreirajIznajmljivanjeSO: " + ex.getMessage());
+        }
+        return 0;
+    }
+    
+    public int izmeniIznajmljivanje(Iznajmljivanje i, List<StavkaIznajmljivanja> listaStavki) {
+        try {
+            return (int) new IzmeniIznajmljivanjeSO(listaStavki).execute(i);
+        } catch (Exception ex) {
+            System.out.println("Greska prilikom izvrsavanja IzmeniIznajmljivanjeSO: " + ex.getMessage());
         }
         return 0;
     }
