@@ -94,6 +94,11 @@ public class ClientThread extends Thread {
                     IznajmljivanjeSaStavkama zaIzmenu = (IznajmljivanjeSaStavkama) request.getParams();
                     response.setParams(controller.izmeniIznajmljivanje(zaIzmenu.getIznajmljivanje(), zaIzmenu.getStavke()));
                    break;
+                   
+                //CLAN - Projekat
+                case LOGIN_CLAN:
+                    response.setParams(controller.vrati((Clan) request.getParams()));
+                    break;
                 default:
                     throw new AssertionError();
             }

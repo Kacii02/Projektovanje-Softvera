@@ -122,6 +122,7 @@ public class Communication {
         return (List<TipClanstva>) response.getParams();
     }
 
+    //IZNAJMLJIVANJE
     public List<Iznajmljivanje> vratiSvaIznajmljivanja() {
         ClientRequest request = new ClientRequest(null, Operacija.VRATI_SVA_IZNAJMLJIVANJA);
         sender.send(request);
