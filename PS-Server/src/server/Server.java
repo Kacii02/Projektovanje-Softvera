@@ -4,6 +4,7 @@
  */
 package server;
 
+import config.FileReaderConfig;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -12,7 +13,8 @@ import java.net.Socket;
  *
  * @author kacan
  */
-public class Server extends Thread{
+public class Server extends Thread {
+
     private int port = 9000;
     private ServerSocket serverSocket;
     private boolean pokrenut = false;
@@ -20,6 +22,9 @@ public class Server extends Thread{
     @Override
     public void run() {
         try {
+            FileReaderConfig fileReader = new FileReaderConfig();
+            fileReader.readFile("server.config");
+            port = fileReader.getPort();
             serverSocket = new ServerSocket(port);
             pokrenut = true;
             System.out.println("S: Server je pokrenut na portu " + port);
@@ -55,5 +60,5 @@ public class Server extends Thread{
             System.out.println("S: Greska prilikom zaustavljanja servera: " + e.getMessage());
         }
     }
-    
+
 }

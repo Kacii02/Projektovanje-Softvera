@@ -4,6 +4,11 @@
  */
 package forme;
 
+import config.FileReaderConfig;
+import config.FileWriterConfig;
+import java.io.IOException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import server.Server;
 
 /**
@@ -22,6 +27,8 @@ public class FrmServer extends javax.swing.JFrame {
         initComponents();
         btnStopirajServer.setEnabled(false);
         setLocationRelativeTo(null);
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        ucitajKonfiguracijuServera();
     }
 
     /**
@@ -37,6 +44,19 @@ public class FrmServer extends javax.swing.JFrame {
         lblStatus = new javax.swing.JLabel();
         btnPokreniServer = new javax.swing.JButton();
         btnStopirajServer = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txtURL = new javax.swing.JTextField();
+        txtKorisnickoIme = new javax.swing.JTextField();
+        txtLozinka = new javax.swing.JTextField();
+        txtPort = new javax.swing.JTextField();
+        btnIzmeniKonfiguraciju = new javax.swing.JButton();
+        btnSacuvajIzmene = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,13 +78,40 @@ public class FrmServer extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Konfiguracija servera");
+
+        jLabel3.setText("URL za konekciju sa bazom:");
+
+        jLabel4.setText("Korisničko ime:");
+
+        jLabel5.setText("Lozinka:");
+
+        jLabel6.setText("Broj porta:");
+
+        btnIzmeniKonfiguraciju.setText("Izmeni konfiguraciju servera");
+        btnIzmeniKonfiguraciju.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIzmeniKonfiguracijuActionPerformed(evt);
+            }
+        });
+
+        btnSacuvajIzmene.setText("Sačuvaj izmene");
+        btnSacuvajIzmene.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSacuvajIzmeneActionPerformed(evt);
+            }
+        });
+
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -72,21 +119,70 @@ public class FrmServer extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnPokreniServer)
                         .addGap(18, 18, 18)
-                        .addComponent(btnStopirajServer)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnStopirajServer))
+                    .addComponent(jSeparator1))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(btnIzmeniKonfiguraciju, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtPort, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE)
+                                    .addComponent(txtLozinka)
+                                    .addComponent(txtURL)
+                                    .addComponent(txtKorisnickoIme)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnSacuvajIzmene, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(80, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(lblStatus))
+                    .addComponent(lblStatus)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPokreniServer)
-                    .addComponent(btnStopirajServer))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(btnStopirajServer)
+                    .addComponent(jLabel3)
+                    .addComponent(txtURL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(txtKorisnickoIme, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtLozinka, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txtPort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnIzmeniKonfiguraciju)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSacuvajIzmene)
+                .addContainerGap(167, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jSeparator2)
+                .addContainerGap())
         );
 
         pack();
@@ -107,6 +203,37 @@ public class FrmServer extends javax.swing.JFrame {
             toggleServerButtons();
         }
     }//GEN-LAST:event_btnStopirajServerActionPerformed
+
+    private void btnIzmeniKonfiguracijuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniKonfiguracijuActionPerformed
+        txtURL.setEditable(true);
+        txtKorisnickoIme.setEditable(true);
+        txtLozinka.setEditable(true);
+        txtPort.setEditable(true);
+        btnIzmeniKonfiguraciju.setVisible(false);
+        btnSacuvajIzmene.setVisible(true);
+    }//GEN-LAST:event_btnIzmeniKonfiguracijuActionPerformed
+
+    private void btnSacuvajIzmeneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSacuvajIzmeneActionPerformed
+        int port;
+        try {
+            port = Integer.parseInt(txtPort.getText());
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Port mora biti broj", "Greška", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String connectionUrl = txtURL.getText();
+        String user = txtKorisnickoIme.getText();
+        String password = txtLozinka.getText();
+        FileWriterConfig fileWriter = new FileWriterConfig(port, connectionUrl, user, password);
+        try {
+            fileWriter.writeFile("server.config");
+        } catch (IOException ex) {
+            System.out.println("Greska prilikom upisivanja u fajl: " + ex.getMessage());
+        }
+        btnIzmeniKonfiguraciju.setVisible(true);
+       
+        ucitajKonfiguracijuServera();
+    }//GEN-LAST:event_btnSacuvajIzmeneActionPerformed
 
     /**
      * @param args the command line arguments
@@ -144,10 +271,23 @@ public class FrmServer extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnIzmeniKonfiguraciju;
     private javax.swing.JButton btnPokreniServer;
+    private javax.swing.JButton btnSacuvajIzmene;
     private javax.swing.JButton btnStopirajServer;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblStatus;
+    private javax.swing.JTextField txtKorisnickoIme;
+    private javax.swing.JTextField txtLozinka;
+    private javax.swing.JTextField txtPort;
+    private javax.swing.JTextField txtURL;
     // End of variables declaration//GEN-END:variables
 
     private void toggleServerButtons() {
@@ -159,5 +299,24 @@ public class FrmServer extends javax.swing.JFrame {
         } else {
             lblStatus.setText("POKRENUT");
         }
+    }
+
+    private void ucitajKonfiguracijuServera() {
+        txtURL.setEditable(false);
+        txtKorisnickoIme.setEditable(false);
+        txtLozinka.setEditable(false);
+        txtPort.setEditable(false);
+        btnSacuvajIzmene.setVisible(false);
+        FileReaderConfig fileReader = new FileReaderConfig();
+        try {
+            fileReader.readFile("server.config");
+        } catch (IOException ex) {
+            System.out.println("Greska prilikom ucitavanja iz server config");
+            return;
+        }
+        txtURL.setText(fileReader.getConnectionUrl());
+        txtKorisnickoIme.setText(fileReader.getUser());
+        txtLozinka.setText(fileReader.getPassword());
+        txtPort.setText(String.valueOf(fileReader.getPort()));
     }
 }

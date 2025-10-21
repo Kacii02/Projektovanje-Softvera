@@ -4,7 +4,9 @@
  */
 package baza;
 
+import config.FileReaderConfig;
 import domain.DomainObject;
+import java.io.IOException;
 import java.sql.*;
 
 /**
@@ -14,11 +16,23 @@ import java.sql.*;
 public class DbBroker {
 
     private Connection connection;
+    String url;
+    String user;
+    String password;
+
+    public DbBroker() {
+        FileReaderConfig fileReader = new FileReaderConfig();
+        try {
+            fileReader.readFile("server.config");
+            url = fileReader.getConnectionUrl();
+            user = fileReader.getUser();
+            password = fileReader.getPassword();
+        } catch (IOException ex) {
+            System.out.println("DBB: Greska prilikom ucitavanja server.config: " + ex.getMessage());
+        }
+    }
 
     public void connect() {
-        String url = "jdbc:mysql://localhost:3306/ps_projekat";
-        String user = "root";
-        String password = "admin";
 
         try {
             connection = DriverManager.getConnection(url, user, password);
