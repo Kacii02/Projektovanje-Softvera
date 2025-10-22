@@ -170,7 +170,7 @@ public class Smena implements Serializable, domain.DomainObject<Smena> {
     public List<Smena> createListFromResultSet(ResultSet rs) throws SQLException {
         List<Smena> lista = new ArrayList<>();
         while(rs.next()) {
-            int rsIdSmena = rs.getInt("idSmene");
+            int rsIdSmena = rs.getInt("idSmena");
             String rsNaziv = rs.getString("naziv");
             LocalTime rsPocetak = rs.getTime("pocetak").toLocalTime();
             LocalTime rsKraj = rs.getTime("kraj").toLocalTime();

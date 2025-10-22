@@ -7,6 +7,7 @@ package forme;
 import forme.clan.FrmClan;
 import forme.iznajmljivanje.FrmIznajmljivanje;
 import forme.knjiga.FrmKnjige;
+import forme.radno_vreme.FrmRadnoVreme;
 import model.Bibliotekar;
 
 /**
@@ -47,6 +48,7 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
         btnLogout = new javax.swing.JButton();
         btnRadSaClanovima = new javax.swing.JButton();
         btnIznajmljivanje = new javax.swing.JButton();
+        btnRadnoVreme = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,6 +88,13 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
             }
         });
 
+        btnRadnoVreme.setText("Radno vreme");
+        btnRadnoVreme.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRadnoVremeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,12 +111,13 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
                         .addComponent(btnLogout))
                     .addComponent(btnRadSaClanovima, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnIznajmljivanje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(lblSmena)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btnIznajmljivanje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnRadnoVreme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -130,7 +140,9 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
                 .addComponent(btnRadSaClanovima)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnIznajmljivanje, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(129, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRadnoVreme)
+                .addContainerGap(100, Short.MAX_VALUE))
         );
 
         pack();
@@ -158,12 +170,19 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
         frmIznajmljivanje.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnIznajmljivanjeActionPerformed
 
+    private void btnRadnoVremeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRadnoVremeActionPerformed
+        FrmRadnoVreme frmRadnoVreme = new FrmRadnoVreme(ulogovani);
+        frmRadnoVreme.setVisible(true);
+        frmRadnoVreme.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnRadnoVremeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIznajmljivanje;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnRadSaClanovima;
     private javax.swing.JButton btnRadSaKnjigama;
+    private javax.swing.JButton btnRadnoVreme;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;

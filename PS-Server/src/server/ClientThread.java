@@ -10,6 +10,8 @@ import model.Bibliotekar;
 import model.Clan;
 import model.Iznajmljivanje;
 import model.Knjiga;
+import model.RadnoVreme;
+import model.Smena;
 import model.StavkaIznajmljivanja;
 import model.TipClanstva;
 import model.pomocni.IznajmljivanjeSaStavkama;
@@ -86,15 +88,27 @@ public class ClientThread extends Thread {
                 case DODAJ_IZNAJMLJIVANJE_SA_STAVKAMA:
                     IznajmljivanjeSaStavkama zaDodavanje = (IznajmljivanjeSaStavkama) request.getParams();
                     response.setParams(controller.kreirajIznajmljivanje(zaDodavanje.getIznajmljivanje(), zaDodavanje.getStavke()));
-                   break;
+                    break;
                 case VRATI_SVE_STAVKE_IZNAJMLJIVANJA:
                     response.setParams(controller.vratiSve((StavkaIznajmljivanja) request.getParams()));
                     break;
                 case IZMENI_IZNAJMLJIVANJE:
                     IznajmljivanjeSaStavkama zaIzmenu = (IznajmljivanjeSaStavkama) request.getParams();
                     response.setParams(controller.izmeniIznajmljivanje(zaIzmenu.getIznajmljivanje(), zaIzmenu.getStavke()));
-                   break;
-                   
+                    break;
+                //RADNO VREME
+                case VRATI_SVA_RADNA_VREMENA:
+                    response.setParams(controller.vratiSve(new RadnoVreme()));
+                    break;
+                case VRATI_SVE_SMENE:
+                    response.setParams(controller.vratiSve(new Smena()));
+                    break;
+                case DODAJ_RADNO_VREME:
+                    response.setParams(controller.dodaj((RadnoVreme) request.getParams()));
+                    break;
+                case OBRISI_RADNO_VREME:
+                    response.setParams(controller.obrisi((RadnoVreme) request.getParams()));
+                    break;
                 //CLAN - Projekat
                 case LOGIN_CLAN:
                     response.setParams(controller.vrati((Clan) request.getParams()));

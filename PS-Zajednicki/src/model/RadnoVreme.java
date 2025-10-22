@@ -172,7 +172,7 @@ public class RadnoVreme implements Serializable, DomainObject<RadnoVreme> {
     @Override
     public String getSelectAllQuery() {
         return "SELECT * "
-                + "FROM radno_vreme r JOIN smena s ON r.smena=s.idSmena JOIN bibliotekar b ON r.bibliotekar=z.idBibliotekar";
+                + "FROM radno_vreme r JOIN smena s ON r.smena=s.idSmena JOIN bibliotekar b ON r.bibliotekar=b.idBibliotekar";
 
     }
 

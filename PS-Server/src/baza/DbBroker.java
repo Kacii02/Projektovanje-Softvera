@@ -80,16 +80,17 @@ public class DbBroker {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        try {
+       try {
             ps = connection.prepareStatement(obj.getInsertQuery(), Statement.RETURN_GENERATED_KEYS);
             obj.fillInsertStatement(ps);
-            ps.executeUpdate();
+            int affectedRows = ps.executeUpdate();
 
             rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 return rs.getInt(1);
+            } else {
+                return affectedRows;
             }
-            return 0;
         } catch (SQLException e) {
             System.out.println("DBB: Doslo je do greske prilikom INSERT upita: " + e.getMessage());
             throw e;

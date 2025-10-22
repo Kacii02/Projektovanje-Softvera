@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -79,6 +80,32 @@ public class Bibliotekar implements Serializable, DomainObject<Bibliotekar> {
     public String toString() {
         return ime + " " + prezime;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Bibliotekar other = (Bibliotekar) obj;
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        return Objects.equals(this.lozinka, other.lozinka);
+    }
+    
+    
 
     @Override
     public String getInsertQuery() {

@@ -11,6 +11,8 @@ import model.Bibliotekar;
 import model.Clan;
 import model.Iznajmljivanje;
 import model.Knjiga;
+import model.RadnoVreme;
+import model.Smena;
 import model.StavkaIznajmljivanja;
 import model.TipClanstva;
 import model.pomocni.IznajmljivanjeSaStavkama;
@@ -150,5 +152,35 @@ public class Communication {
         ServerResponse response = (ServerResponse) receiver.receive();
         return (int) response.getParams();
     }
+
+    public List<RadnoVreme> vratiSvaRadnaVremena() {
+         ClientRequest request = new ClientRequest(null, Operacija.VRATI_SVA_RADNA_VREMENA);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (List<RadnoVreme>) response.getParams();
+    }
+
+    public List<Smena> vratiSveSmene() {
+        ClientRequest request = new ClientRequest(null, Operacija.VRATI_SVE_SMENE);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (List<Smena>) response.getParams();
+    }
+
+    public int dodajRadnoVreme(RadnoVreme novoRadnoVreme) {
+       ClientRequest request = new ClientRequest(novoRadnoVreme, Operacija.DODAJ_RADNO_VREME);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (int) response.getParams();
+    }
+
+    public int obrisiRadnoVreme(RadnoVreme radnoVreme) {
+         ClientRequest request = new ClientRequest(radnoVreme, Operacija.OBRISI_RADNO_VREME);
+        sender.send(request);
+        ServerResponse response = (ServerResponse) receiver.receive();
+        return (int) response.getParams();
+    }
+
+    
 
 }
