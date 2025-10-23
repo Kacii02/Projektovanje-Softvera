@@ -30,6 +30,7 @@ public class FrmClanGlavna extends javax.swing.JFrame {
         communication = Communication.getInstance();
         this.ulogovani = ulogovani;
         initComponents();
+        setTitle("Sistem za praćenje iznajmljivanja");
         popuniPoljaClana();
         dobaviIznajmljivanja();
         System.out.println(iznajmljivanja);

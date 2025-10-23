@@ -319,7 +319,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnRucnoDodavanjeDatuma">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Dodaj datume rucno"/>
+        <Property name="text" type="java.lang.String" value="Dodaj datume ru&#x10d;no"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRucnoDodavanjeDatumaActionPerformed"/>

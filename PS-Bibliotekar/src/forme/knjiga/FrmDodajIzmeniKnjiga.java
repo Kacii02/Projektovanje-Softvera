@@ -161,7 +161,7 @@ public class FrmDodajIzmeniKnjiga extends javax.swing.JFrame {
 
         Knjiga novaKnjiga = new Knjiga(naslov, isbn, autor, izdavac);
         int uspeh = communication.dodajKnjigu(novaKnjiga);
-
+        
         if (uspeh != 0) {
             JOptionPane.showMessageDialog(this, "Knjiga je uspešno dodata!", "Uspešno dodavanje", JOptionPane.INFORMATION_MESSAGE);
             parent.dobaviSveKnjige();

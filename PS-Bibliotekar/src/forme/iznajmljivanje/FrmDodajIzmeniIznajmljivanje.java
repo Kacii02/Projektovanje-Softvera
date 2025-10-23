@@ -152,7 +152,7 @@ public class FrmDodajIzmeniIznajmljivanje extends javax.swing.JFrame {
             }
         });
 
-        btnRucnoDodavanjeDatuma.setText("Dodaj datume rucno");
+        btnRucnoDodavanjeDatuma.setText("Dodaj datume ručno");
         btnRucnoDodavanjeDatuma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRucnoDodavanjeDatumaActionPerformed(evt);

@@ -5,7 +5,6 @@
 package transfer;
 
 import java.io.Serializable;
-import operacije.Operacija;
 
 /**
  *
@@ -13,14 +12,13 @@ import operacije.Operacija;
  */
 public class ServerResponse implements Serializable{
     Object params;
-    Operacija operacija;
 
     public ServerResponse () {
     }
 
-    public ServerResponse(Object params, Operacija operacija) {
+    public ServerResponse(Object params) {
         this.params = params;
-        this.operacija = operacija;
+
     }
 
     public Object getParams() {
@@ -29,14 +27,6 @@ public class ServerResponse implements Serializable{
 
     public void setParams(Object params) {
         this.params = params;
-    }
-
-    public Operacija getOperacija() {
-        return operacija;
-    }
-
-    public void setOperacija(Operacija operacija) {
-        this.operacija = operacija;
     }
 
 }

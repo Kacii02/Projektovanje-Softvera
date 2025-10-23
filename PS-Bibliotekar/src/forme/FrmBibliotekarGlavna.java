@@ -8,6 +8,7 @@ import forme.clan.FrmClan;
 import forme.iznajmljivanje.FrmIznajmljivanje;
 import forme.knjiga.FrmKnjige;
 import forme.radno_vreme.FrmRadnoVreme;
+import javax.swing.JFrame;
 import model.Bibliotekar;
 
 /**
@@ -41,10 +42,8 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         lblBibliotekar = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         btnRadSaKnjigama = new javax.swing.JButton();
-        lblSmena = new javax.swing.JLabel();
         btnLogout = new javax.swing.JButton();
         btnRadSaClanovima = new javax.swing.JButton();
         btnIznajmljivanje = new javax.swing.JButton();
@@ -56,16 +55,12 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
 
         lblBibliotekar.setText("Nevena Veljkovic");
 
-        jLabel3.setText("Smena:");
-
         btnRadSaKnjigama.setText("Rad sa knjigama");
         btnRadSaKnjigama.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRadSaKnjigamaActionPerformed(evt);
             }
         });
-
-        lblSmena.setText("PRVA");
 
         btnLogout.setText("Odjavi se");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -112,11 +107,6 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
                         .addComponent(btnLogout))
                     .addComponent(btnRadSaClanovima, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnIznajmljivanje, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblSmena)
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(btnRadnoVreme, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -128,11 +118,7 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(lblBibliotekar)
                     .addComponent(btnLogout))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(lblSmena))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(34, 34, 34)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnRadSaKnjigama)
@@ -184,10 +170,8 @@ public class FrmBibliotekarGlavna extends javax.swing.JFrame {
     private javax.swing.JButton btnRadSaKnjigama;
     private javax.swing.JButton btnRadnoVreme;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblBibliotekar;
-    private javax.swing.JLabel lblSmena;
     // End of variables declaration//GEN-END:variables
 
     private void popuniLabele() {

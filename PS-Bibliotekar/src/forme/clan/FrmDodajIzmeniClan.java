@@ -249,8 +249,16 @@ public class FrmDodajIzmeniClan extends javax.swing.JFrame {
 
         // Automatski izračunaj datum isteka i trajanje
         azurirajDatumITrajanje();
-
+        
+        for(Clan c: parent.sviClanovi){
+            if(c.getEmail().equals(noviClan.getEmail())){
+                JOptionPane.showMessageDialog(this, "Već postoji član sa tim mejlom,", "Greška", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+        
         int uspesno = communication.dodajClana(noviClan);
+      
         if (uspesno != 0) {
             JOptionPane.showMessageDialog(this, "Član je uspešno dodat.", "Uspeh", JOptionPane.INFORMATION_MESSAGE);
             parent.dobaviSveClanove();

@@ -17,7 +17,7 @@ import model.Clan;
 public class FrmClan extends javax.swing.JFrame {
 
     Communication communication;
-    private List<Clan> sviClanovi;
+    public List<Clan> sviClanovi;
 
     /**
      * Creates new form FrmClan
