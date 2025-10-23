@@ -53,7 +53,7 @@ public class ClientThread extends Thread {
                     break;
                 //KNJIGA
                 case VRATI_SVE_KNJIGE:
-                    response.setParams(controller.vratiSve(new Knjiga()));
+                    response.setParams(controller.vratiSve((Knjiga) request.getParams()));
                     break;
                 case DODAJ_KNJIGU:
                     response.setParams(controller.dodaj((Knjiga) request.getParams()));
@@ -66,7 +66,7 @@ public class ClientThread extends Thread {
                     break;
                 //CLAN
                 case VRATI_SVE_CLANOVE:
-                    response.setParams(controller.vratiSve(new Clan()));
+                    response.setParams(controller.vratiSve((Clan) request.getParams()));
                     break;
                 case DODAJ_CLANA:
                     response.setParams(controller.dodaj((Clan) request.getParams()));

@@ -412,21 +412,21 @@ public class FrmDodajIzmeniIznajmljivanje extends javax.swing.JFrame {
     private void btnFiltrirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrirajActionPerformed
         String naslovFilter = txtNaslov.getText().trim();
         String autorFilter = txtAutor.getText().trim();
+        Knjiga zaPretragu = new Knjiga();
+        zaPretragu.setNaslov(naslovFilter);
+        zaPretragu.setAutor(autorFilter);
 
         if (sveKnjige == null || sveKnjige.isEmpty()) {
             return;
         }
 
         // Filtriranje liste knjiga
-        List<Knjiga> filtriraneKnjige = new ArrayList<>();
-        for (Knjiga knjiga : sveKnjige) {
-            boolean matchesNaslov = (naslovFilter.isEmpty() || knjiga.getNaslov().toLowerCase().contains(naslovFilter.toLowerCase()));
-            boolean matchesAutor = (autorFilter.isEmpty() || knjiga.getAutor().toLowerCase().contains(autorFilter.toLowerCase()));
+        List<Knjiga> filtriraneKnjige;
+        filtriraneKnjige = communication.vratiSveKnjige(zaPretragu);
 
-            // Ako knjizi odgovaraju oba filtera (ili samo jedan od njih), dodajemo je u filtriranu listu
-            if (matchesNaslov && matchesAutor) {
-                filtriraneKnjige.add(knjiga);
-            }
+        if (filtriraneKnjige == null) {
+            JOptionPane.showMessageDialog(this, "Baza ne može da učita listu", "Greška", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         TableModelKnjiga model = new TableModelKnjiga(filtriraneKnjige);
@@ -536,8 +536,10 @@ public class FrmDodajIzmeniIznajmljivanje extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRucnoDodavanjeDatumaActionPerformed
 
     private void btnResetujFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetujFilterActionPerformed
-        txtNapomena.setText("");
+        txtAutor.setText("");
+        txtNaslov.setText("");
         popuniTabeluKnjigama();
+
     }//GEN-LAST:event_btnResetujFilterActionPerformed
 
     private void btnPromeniNapomenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromeniNapomenuActionPerformed
@@ -695,7 +697,7 @@ public class FrmDodajIzmeniIznajmljivanje extends javax.swing.JFrame {
     }
 
     public void dobaviSveKnjige() {
-        sveKnjige = communication.vratiSveKnjige();
+        sveKnjige = communication.vratiSveKnjige(new Knjiga("", null, "", null));
         popuniTabeluKnjigama();
     }
 

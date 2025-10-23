@@ -258,12 +258,13 @@ public class Clan implements Serializable, DomainObject<Clan> {
     @Override
     public String getSelectAllQuery() {
         return "SELECT * "
-                + "FROM clan c LEFT JOIN tip_clanstva tc ON c.tipClanstva = tc.idTipClanstva";
+                + "FROM clan c LEFT JOIN tip_clanstva tc ON c.tipClanstva = tc.idTipClanstva "
+                + "WHERE LOWER(email) LIKE ?";
     }
 
     @Override
     public void fillSelectAllStatement(PreparedStatement ps) throws SQLException {
-        //Za ovu operaciju ne postoje parametri
+        ps.setString(1, "%"+email.toLowerCase()+"%");
     }
 
     @Override

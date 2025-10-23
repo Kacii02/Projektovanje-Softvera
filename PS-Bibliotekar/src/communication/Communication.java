@@ -59,8 +59,8 @@ public class Communication {
     }
 
     //KNJIGA
-    public List<Knjiga> vratiSveKnjige() {
-        ClientRequest request = new ClientRequest(null, Operacija.VRATI_SVE_KNJIGE);
+    public List<Knjiga> vratiSveKnjige(Knjiga zaPretragu) {
+        ClientRequest request = new ClientRequest(zaPretragu, Operacija.VRATI_SVE_KNJIGE);
         sender.send(request);
         ServerResponse response = (ServerResponse) receiver.receive();
         return (List<Knjiga>) response.getParams();
@@ -88,8 +88,8 @@ public class Communication {
     }
 
     //CLAN
-    public List<Clan> vratiSveClanove() {
-        ClientRequest request = new ClientRequest(null, Operacija.VRATI_SVE_CLANOVE);
+    public List<Clan> vratiSveClanove(Clan zaPretragu) {
+        ClientRequest request = new ClientRequest(zaPretragu, Operacija.VRATI_SVE_CLANOVE);
         sender.send(request);
         ServerResponse response = (ServerResponse) receiver.receive();
         return (List<Clan>) response.getParams();

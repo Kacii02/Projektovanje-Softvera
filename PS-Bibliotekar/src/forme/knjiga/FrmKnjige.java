@@ -50,6 +50,7 @@ public class FrmKnjige extends javax.swing.JFrame {
         btnIzmeni = new javax.swing.JButton();
         btnObrisi = new javax.swing.JButton();
         btnZatvori = new javax.swing.JButton();
+        btnResetujFilter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -105,6 +106,13 @@ public class FrmKnjige extends javax.swing.JFrame {
             }
         });
 
+        btnResetujFilter.setText("Resetuj filter");
+        btnResetujFilter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetujFilterActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,8 +120,8 @@ public class FrmKnjige extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1)
                     .addComponent(jScrollPane1)
+                    .addComponent(jSeparator1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -123,14 +131,16 @@ public class FrmKnjige extends javax.swing.JFrame {
                             .addComponent(txtNaslov, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
                             .addComponent(txtAutor))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnFiltriraj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnFiltriraj, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnResetujFilter, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnDodaj)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnIzmeni)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnObrisi)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
                         .addComponent(btnZatvori)))
                 .addContainerGap())
         );
@@ -139,19 +149,22 @@ public class FrmKnjige extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(txtNaslov, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnFiltriraj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(1, 1, 1)))
+                            .addComponent(txtAutor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnResetujFilter, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnFiltriraj, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -159,7 +172,7 @@ public class FrmKnjige extends javax.swing.JFrame {
                     .addComponent(btnIzmeni)
                     .addComponent(btnObrisi)
                     .addComponent(btnZatvori))
-                .addGap(16, 16, 16))
+                .addContainerGap())
         );
 
         pack();
@@ -178,34 +191,35 @@ public class FrmKnjige extends javax.swing.JFrame {
     private void btnFiltrirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrirajActionPerformed
         String naslovFilter = txtNaslov.getText().trim();
         String autorFilter = txtAutor.getText().trim();
+        Knjiga zaPretragu = new Knjiga();
+        zaPretragu.setNaslov(naslovFilter);
+        zaPretragu.setAutor(autorFilter);
 
         if (sveKnjige == null || sveKnjige.isEmpty()) {
             return;
         }
 
         // Filtriranje liste knjiga
-        List<Knjiga> filtriraneKnjige = new ArrayList<>();
-        for (Knjiga knjiga : sveKnjige) {
-            boolean matchesNaslov = (naslovFilter.isEmpty() || knjiga.getNaslov().toLowerCase().contains(naslovFilter.toLowerCase()));
-            boolean matchesAutor = (autorFilter.isEmpty() || knjiga.getAutor().toLowerCase().contains(autorFilter.toLowerCase()));
-
-            // Ako knjizi odgovaraju oba filtera (ili samo jedan od njih), dodajemo je u filtriranu listu
-            if (matchesNaslov && matchesAutor) {
-                filtriraneKnjige.add(knjiga);
-            }
+        List<Knjiga> filtriraneKnjige;
+        filtriraneKnjige = communication.vratiSveKnjige(zaPretragu);
+        
+        if(filtriraneKnjige==null){
+            JOptionPane.showMessageDialog(this, "Baza ne može da učita listu", "Greška", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-
+        
+        
         TableModelKnjiga model = new TableModelKnjiga(filtriraneKnjige);
         tblKnjige.setModel(model);
     }//GEN-LAST:event_btnFiltrirajActionPerformed
 
     private void btnIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIzmeniActionPerformed
         int izbor = tblKnjige.getSelectedRow();
-        if(izbor==-1){
+        if (izbor == -1) {
             JOptionPane.showMessageDialog(this, "Morate izabrati knjigu za izmenu");
             return;
         }
-        
+
         TableModelKnjiga model = (TableModelKnjiga) tblKnjige.getModel();
         Knjiga izabrana = model.getKnjiga(izbor);
 
@@ -238,9 +252,15 @@ public class FrmKnjige extends javax.swing.JFrame {
                 }
             }
         }
-        
+
         dobaviSveKnjige();
     }//GEN-LAST:event_btnObrisiActionPerformed
+
+    private void btnResetujFilterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetujFilterActionPerformed
+        txtAutor.setText("");
+        txtNaslov.setText("");
+        popuniTabeluKnjigama();        // TODO add your handling code here:
+    }//GEN-LAST:event_btnResetujFilterActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -248,6 +268,7 @@ public class FrmKnjige extends javax.swing.JFrame {
     private javax.swing.JButton btnFiltriraj;
     private javax.swing.JButton btnIzmeni;
     private javax.swing.JButton btnObrisi;
+    private javax.swing.JButton btnResetujFilter;
     private javax.swing.JButton btnZatvori;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -265,7 +286,7 @@ public class FrmKnjige extends javax.swing.JFrame {
     }
 
     public void dobaviSveKnjige() {
-        sveKnjige = communication.vratiSveKnjige();
+        sveKnjige = communication.vratiSveKnjige(new Knjiga("", null, "", null));
         popuniTabeluKnjigama();
     }
 }

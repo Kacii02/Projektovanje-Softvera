@@ -163,18 +163,20 @@ public class FrmClan extends javax.swing.JFrame {
 
     private void btnFiltrirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrirajActionPerformed
         String emailFilter = txtEmail.getText().trim();
+        Clan zaPretragu = new Clan();
+        zaPretragu.setEmail(emailFilter);
 
         if (sviClanovi == null || sviClanovi.isEmpty()) {
             return;
         }
 
-        List<Clan> filtriraniClanovi = new ArrayList<>();
-        for (Clan clan : sviClanovi) {
-            boolean matchesEmail = (emailFilter.isEmpty() || clan.getEmail().toLowerCase().contains(emailFilter.toLowerCase()));
-            if (matchesEmail) {
-                filtriraniClanovi.add(clan);
-            }
+        List<Clan> filtriraniClanovi = communication.vratiSveClanove(zaPretragu);
+        
+         if(filtriraniClanovi==null){
+            JOptionPane.showMessageDialog(this, "Baza ne može da učita listu", "Greška", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+      
 
         TableModelClan model = new TableModelClan(filtriraniClanovi);
         tblClanovi.setModel(model);
@@ -259,7 +261,9 @@ public class FrmClan extends javax.swing.JFrame {
     }
 
     public void dobaviSveClanove() {
-       sviClanovi = communication.vratiSveClanove();
+       Clan zaDobavljanjeSvih = new Clan();
+       zaDobavljanjeSvih.setEmail("");
+       sviClanovi = communication.vratiSveClanove(zaDobavljanjeSvih);
        popuniTabeluClanovima();
     }
 }

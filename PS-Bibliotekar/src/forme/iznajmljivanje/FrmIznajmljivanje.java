@@ -240,18 +240,20 @@ public class FrmIznajmljivanje extends javax.swing.JFrame {
 
     private void btnFiltrirajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrirajActionPerformed
         String emailFilter = txtEmail.getText().trim();
+        Clan zaPretragu = new Clan();
+        zaPretragu.setEmail(emailFilter);
 
         if (sviClanovi == null || sviClanovi.isEmpty()) {
             return;
         }
 
-        List<Clan> filtriraniClanovi = new ArrayList<>();
-        for (Clan clan : sviClanovi) {
-            boolean matchesEmail = (emailFilter.isEmpty() || clan.getEmail().toLowerCase().contains(emailFilter.toLowerCase()));
-            if (matchesEmail) {
-                filtriraniClanovi.add(clan);
-            }
+        List<Clan> filtriraniClanovi = communication.vratiSveClanove(zaPretragu);
+        
+         if(filtriraniClanovi==null){
+            JOptionPane.showMessageDialog(this, "Baza ne može da učita listu", "Greška", JOptionPane.ERROR_MESSAGE);
+            return;
         }
+      
 
         TableModelClan model = new TableModelClan(filtriraniClanovi);
         tblClanovi.setModel(model);
@@ -272,10 +274,10 @@ public class FrmIznajmljivanje extends javax.swing.JFrame {
         TableModelClan modelClan = (TableModelClan) tblClanovi.getModel();
         Clan izabraniClan = modelClan.getClan(izbor);
 
-        FrmDodajIzmeniIznajmljivanje form = new FrmDodajIzmeniIznajmljivanje(this,ulogovani, izabraniClan, null);
+        FrmDodajIzmeniIznajmljivanje form = new FrmDodajIzmeniIznajmljivanje(this, ulogovani, izabraniClan, null);
         form.setVisible(true);
         form.setLocationRelativeTo(null);
-        
+
         osveziTabeluIznajmljivanja();
     }//GEN-LAST:event_btnDodajIznajmljivanjeActionPerformed
 
@@ -300,16 +302,16 @@ public class FrmIznajmljivanje extends javax.swing.JFrame {
         TableModelIznajmljivanje modelIznajmljivanje = (TableModelIznajmljivanje) tblIznajmljivanja.getModel();
         Iznajmljivanje izabranoIznajmljivanje = modelIznajmljivanje.getIznajmljivanje(redIznajmljivanje);
 
-        if(izabranoIznajmljivanje.getStatus().equals(Status.VRACENO)){
+        if (izabranoIznajmljivanje.getStatus().equals(Status.VRACENO)) {
             JOptionPane.showMessageDialog(this, "Ne možete menjati vraćeno iznajmljivanje", "Greška", JOptionPane.INFORMATION_MESSAGE);
             return;
         }
-        
+
         // Otvaranje forme za izmenu
-        FrmDodajIzmeniIznajmljivanje form = new FrmDodajIzmeniIznajmljivanje(this,ulogovani, izabraniClan, izabranoIznajmljivanje);
+        FrmDodajIzmeniIznajmljivanje form = new FrmDodajIzmeniIznajmljivanje(this, ulogovani, izabraniClan, izabranoIznajmljivanje);
         form.setVisible(true);
         form.setLocationRelativeTo(null);
-        
+
         osveziTabeluIznajmljivanja();
     }//GEN-LAST:event_btnIzmeniIznajmljivanjeActionPerformed
 
@@ -332,7 +334,9 @@ public class FrmIznajmljivanje extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void dobaviSveClanove() {
-        sviClanovi = communication.vratiSveClanove();
+        Clan zaDobavljanjeSvih = new Clan();
+        zaDobavljanjeSvih.setEmail("");
+        sviClanovi = communication.vratiSveClanove(zaDobavljanjeSvih);
         popuniTabeluClanovima();
 
     }
@@ -345,7 +349,7 @@ public class FrmIznajmljivanje extends javax.swing.JFrame {
     }
 
     private void osveziTabeluIznajmljivanja() {
-       TableModelIznajmljivanje model = new TableModelIznajmljivanje(new ArrayList<>());
-       tblIznajmljivanja.setModel(model);
+        TableModelIznajmljivanje model = new TableModelIznajmljivanje(new ArrayList<>());
+        tblIznajmljivanja.setModel(model);
     }
 }

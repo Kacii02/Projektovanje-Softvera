@@ -178,12 +178,14 @@ public class Knjiga implements Serializable, DomainObject<Knjiga> {
 
     @Override
     public String getSelectAllQuery() {
-        return "SELECT * FROM knjiga";
+        return "SELECT * FROM knjiga "
+                + "WHERE LOWER(naslov) LIKE ? AND LOWER(autor) LIKE ?";
     }
 
     @Override
     public void fillSelectAllStatement(PreparedStatement ps) throws SQLException {
-        //Za ovu operaciju ne postoje parametri
+        ps.setString(1, "%"+naslov.toLowerCase()+"%");
+        ps.setString(2, "%"+autor.toLowerCase()+"%");
     }
 
     @Override
